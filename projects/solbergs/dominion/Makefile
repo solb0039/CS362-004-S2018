@@ -33,7 +33,44 @@ runtests: testDrawCard
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
-all: playdom player 
+unittest_1: unittest1.c dominion.o rngs.o
+	gcc -o unittest1 unittest1.c dominion.o rngs.o -coverage -fpic -lm -g $(CFLAGS)
+
+unittest_2: unittest2.c dominion.o rngs.o
+	gcc -o unittest2 unittest2.c dominion.o rngs.o -coverage -fpic -lm -g $(CFLAGS)
+
+unittest_3: unittest3.c dominion.o rngs.o
+	gcc -o unittest3 unittest3.c dominion.o rngs.o -coverage -fpic -lm -g $(CFLAGS)
+
+unittest_4: unittest4.c dominion.o rngs.o
+	gcc -o unittest4 unittest4.c dominion.o rngs.o -coverage -fpic -lm -g $(CFLAGS)
+
+cardtest_1: cardtest1.c dominion.o rngs.o
+	gcc -o cardtest1 cardtest1.c dominion.o rngs.o -coverage -fpic -lm -g $(CFLAGS)
+
+cardtest_2: cardtest2.c dominion.o rngs.o
+	gcc -o cardtest2 cardtest2.c dominion.o rngs.o -coverage -fpic -lm -g $(CFLAGS)
+
+cardtest_3: cardtest3.c dominion.o rngs.o
+	gcc -o cardtest3 cardtest3.c dominion.o rngs.o -coverage -fpic -lm -g $(CFLAGS)
+
+cardtest_4: cardtest4.c dominion.o rngs.o
+	gcc -o cardtest4 cardtest4.c dominion.o rngs.o -coverage -fpic -lm -g $(CFLAGS)
+
+unittestresults.out: unittest_1 unittest_2 unittest_3 unittest_4 cardtest_1 cardtest_2 cardtest_3 cardtest_4 	
+	./unittest1 >> unittestresults.out
+	./unittest2 >> unittestresults.out
+	./unittest3 >> unittestresults.out
+	./unittest4 >> unittestresults.out
+	./cardtest1 >> unittestresults.out
+	./cardtest2 >> unittestresults.out
+	./cardtest3 >> unittestresults.out
+	./cardtest4 >> unittestresults.out
+	gcov dominion.c -bf >> unittestresults.out
+	cat dominion.c.gcov >> unittestresults.out	
+
+all: playdom player
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe 
+	rm -f unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4 unittestresults.out

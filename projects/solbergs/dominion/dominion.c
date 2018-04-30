@@ -196,9 +196,9 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
 	  updateCoins(state->whoseTurn, state, 0);
 
 	  return 0;
-	}
+}
 
-	int shuffle(int player, struct gameState *state) {
+int shuffle(int player, struct gameState *state) {
 	 
 
 	  int newDeck[MAX_DECK];
@@ -226,7 +226,7 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
 	  }
 
 	  return 0;
-	}
+}
 
 	int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state) 
 	{	
@@ -312,14 +312,14 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
 	  return state->handCount[ whoseTurn(state) ];
 	}
 
-	int handCard(int handPos, struct gameState *state) {
-	  int currentPlayer = whoseTurn(state);
-	  return state->hand[currentPlayer][handPos];
-	}
+int handCard(int handPos, struct gameState *state) {
+	int currentPlayer = whoseTurn(state);
+	return state->hand[currentPlayer][handPos];
+}
 
-	int supplyCount(int card, struct gameState *state) {
+int supplyCount(int card, struct gameState *state) {
 	  return state->supplyCount[card];
-	}
+}
 
 	int fullDeckCount(int player, int card, struct gameState *state) {
 	  int i;
@@ -343,11 +343,12 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
 	  return count;
 	}
 
-	int whoseTurn(struct gameState *state) {
-	  return state->whoseTurn;
-	}
+int whoseTurn(struct gameState *state) {
+	return state->whoseTurn;
+}
 
-	int endTurn(struct gameState *state) {
+int endTurn(struct gameState *state) {
+
 	  int k;
 	  int i;
 	  int currentPlayer = whoseTurn(state);
@@ -385,7 +386,7 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
 	  updateCoins(state->whoseTurn, state , 0);
 
 	  return 0;
-	}
+}
 
 	int isGameOver(struct gameState *state) {
 	  int i;
@@ -520,10 +521,11 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
 	    }
 
 	  return 0;
-	}
+}
 
-	int drawCard(int player, struct gameState *state)
-	{	int count;
+int drawCard(int player, struct gameState *state)
+{	
+	  int count;
 	  int deckCounter;
 	  if (state->deckCount[player] <= 0){//Deck is empty
 	    
@@ -578,10 +580,11 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
 	  }
 
 	  return 0;
-	}
+}
 
-	int getCost(int cardNumber)
-	{
+
+int getCost(int cardNumber)
+{
 	  switch( cardNumber ) 
 	    {
 	    case curse:
@@ -647,7 +650,7 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
 int caseSmithy(struct gameState *state, int handPos, int currentPlayer  )
 {
 	int i;
-
+	
 	for (i = 0; i < 5; i++)  		//Bug: Changed value from 3 to 5
 	{
 		drawCard(currentPlayer, state);
@@ -662,7 +665,7 @@ int caseAdventurer(int temphand[], int drawntreasure, struct gameState *state, i
 {
 	int cardDrawn;
 	int z=0;
-
+	
 	while(drawntreasure<2){
 	if (state->deckCount[currentPlayer] < 1){//if the deck is empty we need to shuffle discard and add to deck
 	  shuffle(currentPlayer, state);
@@ -670,7 +673,7 @@ int caseAdventurer(int temphand[], int drawntreasure, struct gameState *state, i
 	drawCard(currentPlayer, state);
 
 	cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
-	
+
 	if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
 	   
 	   drawntreasure = drawntreasure + 2;			//BUG:  increment treasure by +2
@@ -762,7 +765,6 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
     nextPlayer = 0;
   }
   
-	
   //uses switch to select card and perform actions
   switch( card ) 
     {
