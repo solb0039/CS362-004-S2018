@@ -3,6 +3,8 @@
 	<name>URLValidatorCorrect</name>
 	<comment></comment>
 	<projects>
+		<project>access.engr.oregonstate.edu_FinalProject</project>
+		<project>commons-validator-1.6-src</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
